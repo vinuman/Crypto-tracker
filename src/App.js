@@ -6,7 +6,6 @@ function App() {
     <>
       <div className="App bg-black text-white min-h-screen font-inter">
         <Header />
-        <Footer />
       </div>
     </>
   );
