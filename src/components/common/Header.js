@@ -1,4 +1,5 @@
 import React from "react";
+import TemporaryDrawer from "../drawer";
 
 const Header = () => {
   return (
@@ -6,7 +7,7 @@ const Header = () => {
       <nav className="w-[100%] h-[50px] text-[#fff] flex justify-between items-center p-8 sticky bg-black">
         {/*  DIV LEFT */}
         <div>
-          <h1 className=" text-[36px] font-extrabold">
+          <h1 className=" text-[24px] md:text-[36px] font-extrabold">
             CryptoTracker<span className=" text-blue">.</span>
           </h1>
         </div>
@@ -21,6 +22,13 @@ const Header = () => {
           <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
             Watchlist
           </p>
+          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
+            DashBoard
+          </p>
+        </div>
+        {/* DRAWER DIV */}
+        <div className=" md:hidden">
+          <TemporaryDrawer />
         </div>
       </nav>
     </>
