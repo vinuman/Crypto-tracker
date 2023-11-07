@@ -13,7 +13,7 @@ const Header = () => {
           </h1>
         </div>
         {/*  DIV RIGHT */}
-        <div className="md:flex justify-between items-center gap-16 hidden">
+        <div className="md:flex justify-between items-center gap-8 hidden">
           <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
             Home
           </p>
