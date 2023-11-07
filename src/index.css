@@ -56,3 +56,10 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+
+.custom-h1:hover {
+  color: var(--black);
+  -webkit-text-fill-color: var(--black);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
