@@ -6,8 +6,8 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-export default function TabsComponent() {
-  const [value, setValue] = useState("1");
+export default function TabsComponent({ coins }) {
+  const [value, setValue] = useState("grid");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -36,12 +36,23 @@ export default function TabsComponent() {
               onChange={handleChange}
               aria-label="lab API tabs example"
             >
-              <Tab label="Grid View" value="1" sx={style} />
-              <Tab label="List View" value="2" sx={style} />
+              <Tab label="Grid View" value="grid" sx={style} />
+              <Tab label="List View" value="list" sx={style} />
             </TabList>
           </div>
-          <TabPanel value="1">Item One</TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="grid">
+            <div>
+              {coins.map((coin, index) => (
+                <div key={index}>
+                  <img src={coin.image} alt={coin.name}></img>
+                  <p>
+                    {index + 1}) {coin.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel value="list">Item Two</TabPanel>
         </TabContext>
       </div>
     </ThemeProvider>
