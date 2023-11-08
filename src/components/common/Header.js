@@ -1,6 +1,7 @@
 import React from "react";
 import TemporaryDrawer from "../drawer";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -14,23 +15,29 @@ const Header = () => {
         </div>
         {/*  DIV RIGHT */}
         <div className="md:flex justify-between items-center gap-8 hidden">
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
-            Home
-          </p>
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
-            Compare
-          </p>
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
-            Watchlist
-          </p>
-          {/* <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
-            DashBoard
-          </p> */}
-          <Button
-            onClick={() => console.log("Clicked")}
-            outlined={false}
-            text="DashBoard"
-          />
+          <Link to="/">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
+              Home
+            </p>
+          </Link>
+          <Link to="/compare">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
+              Compare
+            </p>
+          </Link>
+          <Link to="/watchlist">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer">
+              Watchlist
+            </p>
+          </Link>
+
+          <Link to="/dashboard">
+            <Button
+              onClick={() => console.log("Clicked")}
+              outlined={false}
+              text="DashBoard"
+            />
+          </Link>
         </div>
         {/* DRAWER DIV */}
         <div className=" md:hidden">

@@ -4,6 +4,7 @@ import Drawer from "@mui/material/Drawer";
 
 import { IconButton } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { Link } from "react-router-dom";
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = useState(false);
@@ -14,18 +15,26 @@ export default function TemporaryDrawer() {
       </IconButton>
       <Drawer anchor={"right"} open={open} onClose={() => setOpen(false)}>
         <div className=" w-[50vw] bg-black h-[100vh] p-8">
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
-            Home
-          </p>
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
-            Compare
-          </p>
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
-            Watchlist
-          </p>
-          <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
-            DashBoard
-          </p>
+          <Link to="/">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
+              Home
+            </p>
+          </Link>
+          <Link to="/compare">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
+              Compare
+            </p>
+          </Link>
+          <Link to="/watchlist">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
+              Watchlist
+            </p>
+          </Link>
+          <Link to="/dashboard">
+            <p className=" text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer pb-8">
+              Dashboard
+            </p>
+          </Link>
         </div>
       </Drawer>
     </div>
