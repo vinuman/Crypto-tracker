@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Grid from "./Grid";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 export default function TabsComponent({ coins }) {
@@ -41,14 +42,9 @@ export default function TabsComponent({ coins }) {
             </TabList>
           </div>
           <TabPanel value="grid">
-            <div>
+            <div className="flex justify-center items-center flex-wrap gap-[2rem] m-[2rem]">
               {coins.map((coin, index) => (
-                <div key={index}>
-                  <img src={coin.image} alt={coin.name}></img>
-                  <p>
-                    {index + 1}) {coin.name}
-                  </p>
-                </div>
+                <Grid coin={coin} key={index} />
               ))}
             </div>
           </TabPanel>
