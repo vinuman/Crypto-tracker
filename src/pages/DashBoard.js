@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import TabsComponent from "../components/TabsComponent";
 import axios from "axios";
+import Search from "../components/Search";
 
 const DashBoard = () => {
   const [coins, setCoins] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const filteredCoins = coins.filter(
+    (coin) =>
+      coin.name.toLowerCase().includes(search.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
     axios
@@ -20,7 +28,12 @@ const DashBoard = () => {
   return (
     <>
       <Header />
-      <TabsComponent coins={coins} />
+      <Search search={search} setSearch={setSearch} />
+      <TabsComponent
+        coins={coins}
+        filteredCoins={filteredCoins}
+        search={search}
+      />
     </>
   );
 };

@@ -39,7 +39,7 @@ const List = ({ coin }) => {
         </Tooltip>
         <td className=" pl-32 w-[16%] hidden lg:block">
           <div
-            className={`md:w-[2.5rem] md:h-[2.5rem] h-[1.5rem] w-[1.5rem] border-2 rounded-full flex justify-center items-center group transition-all duration-300 ${
+            className={`md:w-[2.5rem] md:h-[2.5rem]  border-2 rounded-full flex justify-center items-center group transition-all duration-300 ${
               coin.price_change_percentage_24h > 0
                 ? " border-green  hover:bg-green"
                 : "border-red  hover:bg-red"
