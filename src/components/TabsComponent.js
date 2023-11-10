@@ -5,6 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Grid from "./Grid";
+import List from "./List";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 export default function TabsComponent({ coins }) {
@@ -24,7 +25,6 @@ export default function TabsComponent({ coins }) {
 
   const style = {
     color: "white",
-    fontSize: "20px",
   };
 
   return (
@@ -37,7 +37,12 @@ export default function TabsComponent({ coins }) {
               onChange={handleChange}
               aria-label="lab API tabs example"
             >
-              <Tab label="Grid View" value="grid" sx={style} />
+              <Tab
+                label="Grid View"
+                value="grid"
+                sx={style}
+                className=" text-[1rem] md:text-[1.8rem]"
+              />
               <Tab label="List View" value="list" sx={style} />
             </TabList>
           </div>
@@ -48,7 +53,13 @@ export default function TabsComponent({ coins }) {
               ))}
             </div>
           </TabPanel>
-          <TabPanel value="list">Item Two</TabPanel>
+          <TabPanel value="list">
+            <table className=" lg:w-[90%] w-[100%] mx-auto ">
+              {coins.map((coin, index) => (
+                <List coin={coin} key={index} />
+              ))}
+            </table>
+          </TabPanel>
         </TabContext>
       </div>
     </ThemeProvider>
