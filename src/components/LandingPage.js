@@ -3,6 +3,7 @@ import Button from "./common/Button";
 import iphone from "../assets/iphone.png";
 import gradient from "../assets/gradient.png";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -41,7 +42,13 @@ const LandingPage = () => {
             transition={{ duration: 0.5, delay: 1 }}
             className="flex gap-8 pt-8 "
           >
-            <Button text="DashBoard" outlined={false} />
+            <Link to="/dashboard">
+              <Button
+                onClick={() => console.log("Clicked")}
+                text="DashBoard"
+                outlined={false}
+              />
+            </Link>
             <Button text="Share" outlined={true} />
           </motion.div>
         </div>

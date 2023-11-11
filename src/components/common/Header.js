@@ -9,9 +9,11 @@ const Header = () => {
       <nav className="w-[100%] h-[50px] text-[#fff] flex justify-between items-center px-8 py-12 sticky bg-black">
         {/*  DIV LEFT */}
         <div>
-          <h1 className=" text-[24px] md:text-[36px] font-extrabold">
-            CryptoTracker<span className=" text-blue">.</span>
-          </h1>
+          <Link to="/">
+            <h1 className=" text-[24px] md:text-[36px] font-extrabold">
+              CryptoTracker<span className=" text-blue">.</span>
+            </h1>
+          </Link>
         </div>
         {/*  DIV RIGHT */}
         <div className="md:flex justify-between items-center gap-8 hidden">
