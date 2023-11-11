@@ -6,7 +6,7 @@ import { Tooltip } from "@mui/material";
 const List = ({ coin }) => {
   return (
     <>
-      <div className="w-[100%] flex items-center lg:justify-center justify-between my-4 hover:bg-darkgrey transition-all duration-100 ">
+      <div className="w-[100%] flex items-center lg:justify-center justify-between my-4 hover:bg-darkgrey transition-all duration-100 group ">
         <Tooltip title="coin name">
           <td className="flex justify-start items-center gap-[0.5rem] lg:gap-[1rem] m-[1rem] lg:w-[16%] w-[30%] ">
             <img
@@ -29,8 +29,8 @@ const List = ({ coin }) => {
             <div
               className={`border-2 rounded-full py-[0.5rem] px-[0.6rem] text-center font-bold text-[1rem] transition-all duration-300  ${
                 coin.price_change_percentage_24h > 0
-                  ? "border-green text-green hover:text-white hover:bg-green"
-                  : "border-red text-red hover:text-white hover:bg-red"
+                  ? "border-green text-green group-hover:text-white group-hover:bg-green"
+                  : "border-red text-red group-hover:text-white group-hover:bg-red"
               }`}
             >
               {coin.price_change_percentage_24h.toFixed(2)}%
@@ -39,10 +39,10 @@ const List = ({ coin }) => {
         </Tooltip>
         <td className=" pl-32 w-[16%] hidden lg:block">
           <div
-            className={`md:w-[2.5rem] md:h-[2.5rem]  border-2 rounded-full flex justify-center items-center group transition-all duration-300 ${
+            className={`md:w-[2.5rem] md:h-[2.5rem]  border-2 rounded-full flex justify-center items-center transition-all duration-300 ${
               coin.price_change_percentage_24h > 0
-                ? " border-green  hover:bg-green"
-                : "border-red  hover:bg-red"
+                ? " border-green  group-hover:bg-green"
+                : "border-red  group-hover:bg-red"
             }`}
           >
             {coin.price_change_percentage_24h > 0 ? (

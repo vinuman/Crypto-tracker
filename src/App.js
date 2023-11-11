@@ -1,5 +1,6 @@
 import DashBoard from "./pages/DashBoard";
 import Home from "./pages/Home";
+import CoinPage from "./pages/CoinPage";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/dashboard" element={<DashBoard />}></Route>
+          <Route path="/coin/:id" element={<CoinPage />}></Route>
         </Routes>
       </div>
     </>

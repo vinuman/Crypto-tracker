@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Header from "../components/common/Header";
 import TabsComponent from "../components/TabsComponent";
 import axios from "axios";
 import Search from "../components/Search";
 import PaginationComponenet from "../components/Pagination";
 import Loader from "../components/common/Loader";
+import Error from "../components/common/Error";
 import BackToTop from "../components/common/BackToTop";
 
 const DashBoard = () => {
@@ -58,15 +58,7 @@ const DashBoard = () => {
     return (
       <>
         <Header />
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex justify-center mt-32 text-[40px] text-grey "
-        >
-          <span className=" text-red pr-4 underline">{error}! </span>
-          Please try after some time :(
-        </motion.h1>
+        <Error error={error} />
       </>
     );
   }
