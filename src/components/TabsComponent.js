@@ -8,7 +8,7 @@ import Grid from "./Grid";
 import List from "./List";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-export default function TabsComponent({ coins, filteredCoins }) {
+export default function TabsComponent({ coins }) {
   const [value, setValue] = useState("grid");
 
   const handleChange = (event, newValue) => {
@@ -48,19 +48,24 @@ export default function TabsComponent({ coins, filteredCoins }) {
           </div>
           <TabPanel value="grid">
             <div className="flex justify-center items-center flex-wrap gap-[2rem] m-[2rem]">
-              {filteredCoins.map((coin, index) => (
+              {coins.map((coin, index) => (
                 <Grid coin={coin} key={index} />
               ))}
-              {filteredCoins === "" && (
-                <h1 className="text-white text-[60px]">Nothing to display</h1>
+              {coins.length === 0 && (
+                <h1 className="text-grey text-[60px]">No Results!</h1>
               )}
             </div>
           </TabPanel>
           <TabPanel value="list">
             <table className=" lg:w-[90%] w-[100%] mx-auto ">
-              {filteredCoins.map((coin, index) => (
+              {coins.map((coin, index) => (
                 <List coin={coin} key={index} />
               ))}
+              {coins.length === 0 && (
+                <h1 className="text-grey text-[60px] text-center pt-8">
+                  No Results!
+                </h1>
+              )}
             </table>
           </TabPanel>
         </TabContext>

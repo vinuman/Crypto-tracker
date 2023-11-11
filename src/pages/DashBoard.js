@@ -3,10 +3,19 @@ import Header from "../components/common/Header";
 import TabsComponent from "../components/TabsComponent";
 import axios from "axios";
 import Search from "../components/Search";
+import PaginationComponenet from "../components/Pagination";
 
 const DashBoard = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [paginatedCoins, setPaginatedCoins] = useState([]);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    let prevIndex = (value - 1) * 10;
+    setPaginatedCoins(coins.slice(prevIndex, prevIndex + 10));
+  };
 
   const filteredCoins = coins.filter(
     (coin) =>
@@ -21,6 +30,7 @@ const DashBoard = () => {
       )
       .then((response) => {
         setCoins(response.data);
+        setPaginatedCoins(response.data.slice(0, 10));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -30,10 +40,12 @@ const DashBoard = () => {
       <Header />
       <Search search={search} setSearch={setSearch} />
       <TabsComponent
-        coins={coins}
-        filteredCoins={filteredCoins}
+        coins={search ? filteredCoins : paginatedCoins}
         search={search}
       />
+      {!search && (
+        <PaginationComponenet page={page} handlePageChange={handlePageChange} />
+      )}
     </>
   );
 };
