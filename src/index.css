@@ -63,3 +63,13 @@ img {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
 }
+
+.desc a {
+  color: #3a80e9;
+  text-decoration: underline;
+  transition: all 1s;
+}
+.desc a:hover {
+  font-size: 1.2rem;
+  text-decoration: none;
+}
