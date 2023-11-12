@@ -25,9 +25,9 @@ function LineChart({ chartData, priceType, multiAxis }) {
             if (priceType == "total_volumes") {
               return convertNumbers(value);
             } else if (priceType == "market_caps") {
-              return "$" + convertNumbers(value);
+              return "$ " + convertNumbers(value);
             } else {
-              return "$" + value.toLocaleString();
+              return "$ " + value.toLocaleString();
             }
           },
         },

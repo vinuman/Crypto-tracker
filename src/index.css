@@ -73,3 +73,18 @@ img {
   font-size: 1.2rem;
   text-decoration: none;
 }
+
+.toggle-btn {
+  transition: all 1s;
+}
+
+.toggle-btn:hover {
+  color: var(--white) !important;
+}
+
+@media only screen and (max-width: 758px) {
+  .toggle-btn {
+    font-size: 0.7rem !important;
+    padding: 0.5rem !important;
+  }
+}
