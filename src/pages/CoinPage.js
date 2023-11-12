@@ -11,14 +11,28 @@ import { getCoinData } from "../functions/getCoinData";
 import { getCoinPrices } from "../functions/getCoinPrices";
 import LineChart from "../components/LineChart";
 import { convertDate } from "../functions/convertDate";
+import SelectDays from "../components/SelectDays";
+import { settingChartData } from "../functions/settingChartData";
 
 const CoinPage = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [coinData, setCoinData] = useState([]);
-  const [days, setDays] = useState(120);
+  const [days, setDays] = useState(30);
   const [chartData, setChartData] = useState({});
+
+  const handleDayChange = async (event) => {
+    setLoading(true);
+
+    const prices = await getCoinPrices(id, event.target.value);
+    setDays(event.target.value);
+    if (prices.length > 0) {
+      settingChartData(setChartData, prices);
+    }
+
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (id) {
@@ -33,22 +47,7 @@ const CoinPage = () => {
       coinObject(setCoinData, data);
       const prices = await getCoinPrices(id, days);
       if (prices.length > 0) {
-        console.log("yes yes");
-        setChartData({
-          labels: prices.map((price) => convertDate(price[0])),
-          datasets: [
-            {
-              data: prices.map((price) => price[1]),
-              borderColor: "#3a80e9",
-              backgroundColor: "rgba(58, 128, 233, 0.1)",
-              yAxisID: "y",
-              borderWidth: 1,
-              fill: true,
-              tension: 0.25,
-              pointRadius: 0,
-            },
-          ],
-        });
+        settingChartData(setChartData, prices);
         setLoading(false);
       }
     } else {
@@ -67,6 +66,9 @@ const CoinPage = () => {
         <>
           <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
             <List coin={coinData} />
+          </div>
+          <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+            <SelectDays days={days} handleDayChange={handleDayChange} />
           </div>
           <div className="bg-darkgrey m-[1.5rem] rounded-lg">
             <LineChart chartData={chartData} />
