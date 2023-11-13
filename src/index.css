@@ -82,6 +82,10 @@ img {
   color: var(--white) !important;
 }
 
+.selected-link {
+  color: var(--white) !important;
+}
+
 @media only screen and (max-width: 758px) {
   .toggle-btn {
     font-size: 0.7rem !important;

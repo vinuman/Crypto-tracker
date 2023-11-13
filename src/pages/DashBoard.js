@@ -37,12 +37,14 @@ const DashBoard = () => {
       .then((response) => {
         setCoins(response.data);
         setPaginatedCoins(response.data.slice(0, 10));
-        setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
-        setLoading(false);
+        if (err.response) {
+          console.log("Server responded with an error:", error.response.data);
+        }
       });
+    setLoading(false);
   }, []);
 
   if (loading) {
