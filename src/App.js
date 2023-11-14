@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import CoinPage from "./pages/CoinPage";
 import Compare from "./pages/Compare";
 import { Routes, Route } from "react-router-dom";
+import WatchList from "./pages/WatchList";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/dashboard" element={<DashBoard />}></Route>
           <Route path="/coin/:id" element={<CoinPage />}></Route>
           <Route path="/compare" element={<Compare />}></Route>
+          <Route path="/watchlist" element={<WatchList />}></Route>
         </Routes>
       </div>
     </>
