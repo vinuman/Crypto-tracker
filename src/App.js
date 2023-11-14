@@ -11,10 +11,10 @@ function App() {
       <div className="App bg-black text-white min-h-screen font-inter max-w-[1800px] mx-auto">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/dashboard" element={<DashBoard />}></Route>
-          <Route path="/coin/:id" element={<CoinPage />}></Route>
           <Route path="/compare" element={<Compare />}></Route>
           <Route path="/watchlist" element={<WatchList />}></Route>
+          <Route path="/dashboard" element={<DashBoard />}></Route>
+          <Route path="/coin/:id" element={<CoinPage />}></Route>
         </Routes>
       </div>
     </>

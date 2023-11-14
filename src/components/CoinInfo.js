@@ -25,6 +25,13 @@ const CoinInfo = ({ title, desc }) => {
             className="m-[1rem] desc cursor-pointer transition-all duration-300"
           ></p>
         )}
+        {!desc && (
+          <div>
+            <p className=" font-medium ml-4 text-[1rem] text-grey">
+              No details available :(
+            </p>
+          </div>
+        )}
       </div>
     </>
   );

@@ -9,13 +9,14 @@ import List from "../components/List";
 import CoinInfo from "../components/CoinInfo";
 import { settingChartData } from "../functions/settingChartData";
 import LineChart from "../components/LineChart";
+import Loader from "../components/common/Loader";
 
 const Compare = () => {
   const [crypto1, setCrypto1] = useState("bitcoin");
   const [crypto2, setCrypto2] = useState("ethereum");
   const [crypto1Data, setCrypto1Data] = useState();
   const [crypto2Data, setCrypto2Data] = useState();
-  const [days, setDays] = useState(30);
+  const [days, setDays] = useState(7);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [priceType, setPriceType] = useState("prices");
@@ -23,9 +24,17 @@ const Compare = () => {
     labels: [],
     datasets: [],
   });
+  /* 
+  const handleDaysChange = () => {}; */
 
-  const handleDaysChange = (event) => {
+  const handleDaysChange = async (event) => {
+    const price1 = await getCoinPrices(crypto1, event.target.value, "prices");
+    const price2 = await getCoinPrices(crypto2, event.target.value, "prices");
     setDays(event.target.value);
+    if (price1.length > 0 && price2.length > 0) {
+      settingChartData(setChartData, price1, price2);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -83,10 +92,14 @@ const Compare = () => {
     setLoading(false);
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Header />
-      <div className="flex justify-between items-center m-[1.5rem]">
+      <div className="flex justify-between items-center mx-[1.5rem] ">
         <SelectCoins
           crypto1={crypto1}
           crypto2={crypto2}
