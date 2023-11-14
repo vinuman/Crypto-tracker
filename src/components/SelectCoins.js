@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import axios from "axios";
+
 import Error from "./common/Error";
 import { loadingButtonClasses } from "@mui/lab";
 import Loader from "./common/Loader";
+import { get100Coins } from "../functions/get100Coins";
 
 const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
   const [allCoins, setAllCoins] = useState([]);
@@ -28,20 +29,20 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
   };
 
   useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
     setLoading(true);
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=100&page=1&sparkline=false"
-      )
-      .then((response) => {
-        setError(false);
-        setAllCoins(response.data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-    setLoading(false);
-  });
+    const data = await get100Coins();
+    if (data && data.length > 2) {
+      setAllCoins(data);
+      setLoading(false);
+    } else {
+      setError(data);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -62,7 +63,7 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
   return (
     <>
       <div className="flex justify-start items-center gap-[0.5rem] m-[1.5rem]">
-        <p>Crypto 1</p>
+        <p className=" font-bold text-blue">Crypto 1</p>
         <Select
           value={crypto1}
           label="Crypto 1"
@@ -73,7 +74,7 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
             <MenuItem value={coin.id}>{coin.name}</MenuItem>
           ))}
         </Select>
-        <p>Crypto 2</p>
+        <p className=" font-bold ml-4 text-green">Crypto 2</p>
         <Select
           value={crypto2}
           label="Crypto 2"

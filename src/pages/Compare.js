@@ -5,42 +5,32 @@ import SelectDays from "../components/SelectDays";
 import { getCoinData } from "../functions/getCoinData";
 import { coinObject } from "../functions/convertObject";
 import { getCoinPrices } from "../functions/getCoinPrices";
+import List from "../components/List";
+import CoinInfo from "../components/CoinInfo";
+import { settingChartData } from "../functions/settingChartData";
+import LineChart from "../components/LineChart";
 
 const Compare = () => {
   const [crypto1, setCrypto1] = useState("bitcoin");
   const [crypto2, setCrypto2] = useState("ethereum");
-  const [crypto1Data, setCrypto1Data] = useState({});
-  const [crypto2Data, setCrypto2Data] = useState({});
+  const [crypto1Data, setCrypto1Data] = useState();
+  const [crypto2Data, setCrypto2Data] = useState();
   const [days, setDays] = useState(30);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [priceType, setPriceType] = useState("prices");
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
   const handleDaysChange = (event) => {
     setDays(event.target.value);
   };
 
-  const handleCoinChange = async (event, isCoin2) => {
-    setLoading(true);
-    if (isCoin2) {
-      setCrypto2(event.target.value);
-      const data = await getCoinData(event.target.value);
-      if (data) {
-        coinObject(setCrypto1Data, data);
-      }
-    } else {
-      setCrypto1(event.target.value);
-      const data = await getCoinData(event.target.value);
-      if (data) {
-        coinObject(setCrypto2Data, data);
-      }
-    }
-    const prices1 = await getCoinPrices(crypto1, days, priceType);
-    const prices2 = await getCoinPrices(crypto2, days, priceType);
-    setLoading(false);
-  };
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   async function getData() {
     setLoading(true);
@@ -57,11 +47,42 @@ const Compare = () => {
       const prices1 = await getCoinPrices(crypto1, days, priceType);
       const prices2 = await getCoinPrices(crypto2, days, priceType);
       if (prices1.length > 0 && prices2.length > 0) {
-        /* settingChartData(setChartData, prices); */
+        settingChartData(setChartData, prices1, prices2);
         setLoading(false);
       }
     }
   }
+
+  const handleCoinChange = async (event, isCoin2) => {
+    setLoading(true);
+    if (isCoin2) {
+      const newCrypto2 = event.target.value;
+      setCrypto2(newCrypto2);
+      const data = await getCoinData(newCrypto2);
+      if (data) {
+        coinObject(setCrypto2Data, data);
+      }
+      const prices1 = await getCoinPrices(crypto1, days, priceType);
+      const prices2 = await getCoinPrices(newCrypto2, days, priceType);
+      if (prices1.length > 0 && prices2.length > 0) {
+        settingChartData(setChartData, prices1, prices2);
+      }
+    } else {
+      const newCrypto1 = event.target.value;
+      setCrypto1(newCrypto1);
+      const data = await getCoinData(newCrypto1);
+      if (data) {
+        coinObject(setCrypto1Data, data);
+      }
+      const prices1 = await getCoinPrices(newCrypto1, days, priceType);
+      const prices2 = await getCoinPrices(crypto2, days, priceType);
+      if (prices1.length > 0 && prices2.length > 0) {
+        settingChartData(setChartData, prices1, prices2);
+      }
+    }
+    setLoading(false);
+  };
+
   return (
     <>
       <Header />
@@ -73,6 +94,28 @@ const Compare = () => {
         />
         <SelectDays days={days} handleDayChange={handleDaysChange} />
       </div>
+      <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+        <List coin={crypto1Data} />
+      </div>
+      <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+        <List coin={crypto2Data} />
+      </div>
+      <div className="bg-darkgrey m-[1.5rem] rounded-lg">
+        <LineChart
+          chartData={chartData}
+          priceType={"prices"}
+          multiAxis={true}
+        />
+      </div>
+
+      <CoinInfo
+        title={crypto1Data ? crypto1Data.name : null}
+        desc={crypto1Data ? crypto1Data.desc : null}
+      />
+      <CoinInfo
+        title={crypto2Data ? crypto2Data.name : null}
+        desc={crypto2Data ? crypto2Data.desc : null}
+      />
     </>
   );
 };

@@ -7,6 +7,7 @@ import PaginationComponenet from "../components/Pagination";
 import Loader from "../components/common/Loader";
 import Error from "../components/common/Error";
 import BackToTop from "../components/common/BackToTop";
+import { get100Coins } from "../functions/get100Coins";
 
 const DashBoard = () => {
   const [coins, setCoins] = useState([]);
@@ -14,7 +15,7 @@ const DashBoard = () => {
   const [page, setPage] = useState(1);
   const [paginatedCoins, setPaginatedCoins] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -29,23 +30,21 @@ const DashBoard = () => {
   );
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=100&page=1&sparkline=false"
-      )
-      .then((response) => {
-        setCoins(response.data);
-        setPaginatedCoins(response.data.slice(0, 10));
-      })
-      .catch((err) => {
-        setError(err.message);
-        if (err.response) {
-          console.log("Server responded with an error:", error.response.data);
-        }
-      });
-    setLoading(false);
+    getData();
   }, []);
+
+  const getData = async () => {
+    setLoading(true);
+    const data = await get100Coins();
+    if (data && data.length > 2) {
+      setCoins(data);
+      setPaginatedCoins(data.slice(0, 10));
+      setLoading(false);
+    } else {
+      setError(data);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (

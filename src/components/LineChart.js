@@ -2,8 +2,13 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { convertNumbers } from "../functions/convertNumbers";
+import { useState } from "react";
+import Loader from "./common/Loader";
 
 function LineChart({ chartData, priceType, multiAxis }) {
+  if (!chartData || !chartData.labels || chartData.datasets.length === 0) {
+    return <Loader />;
+  }
   const options = {
     plugins: {
       legend: {
@@ -18,7 +23,7 @@ function LineChart({ chartData, priceType, multiAxis }) {
     scales: {
       y: {
         type: "linear",
-        display: true,
+        display: false,
         position: "left",
         ticks: {
           callback: function (value) {
@@ -34,7 +39,7 @@ function LineChart({ chartData, priceType, multiAxis }) {
       },
       y2: multiAxis && {
         type: "linear",
-        display: true,
+        display: false,
         position: "right",
         ticks: {
           callback: function (value) {

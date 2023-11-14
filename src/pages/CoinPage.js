@@ -58,7 +58,7 @@ const CoinPage = () => {
       coinObject(setCoinData, data);
       const prices = await getCoinPrices(id, days, togglePriceType);
       if (prices.length > 0) {
-        settingChartData(setChartData, prices);
+        settingChartData(setChartData, prices, null);
         setLoading(false);
       }
     } else {

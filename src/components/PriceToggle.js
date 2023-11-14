@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -7,6 +7,7 @@ export default function PriceToggle({
   togglePriceType,
   handlePriceTypeChange,
 }) {
+  const [selected, setSelected] = useState("prices");
   return (
     <div className="flex items-center justify-center">
       <ToggleButtonGroup
@@ -15,7 +16,7 @@ export default function PriceToggle({
         onChange={handlePriceTypeChange}
         sx={{
           "&.Mui-selected": {
-            color: "var(--green) !important",
+            color: "var(--blue) !important",
           },
           borderColor: "var(--blue)",
           border: "unset !important",
@@ -29,13 +30,28 @@ export default function PriceToggle({
           },
         }}
       >
-        <ToggleButton className="toggle-btn" value="prices">
+        <ToggleButton
+          className={`toggle-btn ${
+            selected === "prices" ? "selected-toggle" : ""
+          }`}
+          value="prices"
+        >
           Price
         </ToggleButton>
-        <ToggleButton className="toggle-btn" value="market_caps">
+        <ToggleButton
+          className={`toggle-btn ${
+            selected === "market_caps" ? "selected-toggle" : ""
+          }`}
+          value="market_caps"
+        >
           Market Cap
         </ToggleButton>
-        <ToggleButton className="toggle-btn" value="total_volumes">
+        <ToggleButton
+          className={`toggle-btn ${
+            selected === "total_volumes" ? "selected-toggle" : ""
+          }`}
+          value="total_volumes"
+        >
           Total Volume
         </ToggleButton>
       </ToggleButtonGroup>
