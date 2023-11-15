@@ -78,6 +78,11 @@ img {
   color: var(--white) !important;
 }
 
+.bookmark {
+  width: 3rem;
+  font-size: 4rem;
+}
+
 @media only screen and (max-width: 758px) {
   .toggle-btn {
     font-size: 0.7rem !important;
