@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
@@ -7,9 +7,14 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { addToWatchList } from "../functions/addToWatchList";
 import { alreadyAddedToWatchList } from "../functions/alreadyAddedToWatchList";
 import { removeFromWatchList } from "../functions/removeFromWatchList";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { motion } from "framer-motion";
 
 const Grid = ({ coin }) => {
   const [added, setAdded] = useState(alreadyAddedToWatchList(coin.id));
+  const [sucessMessage, setSuccessMessage] = useState(false);
+  const [removeMessage, setRemoveMessage] = useState(false);
   const navigate = useNavigate();
 
   const handleDivClick = () => {
@@ -17,20 +22,35 @@ const Grid = ({ coin }) => {
   };
 
   const handleBookMarkClick = (event) => {
+    setRemoveMessage(false);
+    setSuccessMessage(false);
     event.stopPropagation();
     if (added) {
       removeFromWatchList(coin.id);
+      setRemoveMessage(true);
       setAdded(false);
     } else {
       addToWatchList(coin.id);
+      setSuccessMessage(true);
       setAdded(true);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRemoveMessage(false);
+      setSuccessMessage(false);
+    }, 5000);
+  }, [sucessMessage, removeMessage]);
+
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 150 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         onClick={handleDivClick}
-        className={`w-[320px] bg-darkgrey border-2 border-darkgrey rounded-lg flex flex-col justify-center transition-all duration-300 group cursor-pointer ${
+        className={`w-[320px] relative bg-darkgrey border-2 border-darkgrey rounded-lg flex flex-col justify-center transition-all duration-300 group cursor-pointer ${
           coin.price_change_percentage_24h > 0
             ? " hover:border-green"
             : " hover:border-red"
@@ -52,28 +72,16 @@ const Grid = ({ coin }) => {
           </div>
           <div
             onClick={handleBookMarkClick}
-            className={`flex justify-center items-center ml-24 w-[3rem] h-[3rem] hover:border-2 ${
+            className={`flex justify-center items-center ml-24 cursor-pointer w-[3rem] h-[3rem]  ${
               coin.price_change_percentage_24h > 0
                 ? "border-green"
                 : "border-red"
             }`}
           >
             {added ? (
-              <BookmarkAddedIcon
-                className={`${
-                  coin.price_change_percentage_24h > 0
-                    ? " text-green"
-                    : "text-red"
-                }`}
-              />
+              <BookmarkAddedIcon className={` text-white hover:text-[2rem]`} />
             ) : (
-              <BookmarkAddIcon
-                className={`${
-                  coin.price_change_percentage_24h > 0
-                    ? " text-green"
-                    : "text-red"
-                }`}
-              />
+              <BookmarkAddIcon className={` text-white hover:text-[2rem]`} />
             )}
           </div>
         </div>
@@ -118,7 +126,29 @@ const Grid = ({ coin }) => {
             </p>
           </div>
         </div>
-      </div>
+        {sucessMessage && (
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-[100%] h-[2.4rem] bg-green text-white flex items-center justify-center  rounded-bottom-lg absolute bottom-0 z-50"
+          >
+            <p className="p-2 font-semibold">Added to Watchlist</p>
+            <CheckCircleIcon />
+          </motion.div>
+        )}
+        {removeMessage && (
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-[100%] h-[2.4rem] bg-red text-white flex items-center  justify-center rounded-bottom-lg absolute bottom-0 z-50"
+          >
+            <p className="p-2 font-semibold">Removed from Watchlist</p>
+            <CancelIcon />
+          </motion.div>
+        )}
+      </motion.div>
     </>
   );
 };

@@ -48,20 +48,18 @@ export default function TabsComponent({ coins }) {
           </div>
           <TabPanel value="grid">
             <div className="flex justify-center items-center flex-wrap gap-[2rem] m-[2rem]">
-              {coins.map((coin, index) => (
-                <Grid coin={coin} key={index} />
-              ))}
-              {coins.length === 0 && (
+              {coins &&
+                coins.map((coin, index) => <Grid coin={coin} key={index} />)}
+              {coins && coins.length === 0 && (
                 <h1 className="text-grey text-[60px]">No Results!</h1>
               )}
             </div>
           </TabPanel>
           <TabPanel value="list">
             <table className=" lg:w-[90%] w-[100%] mx-auto ">
-              {coins.map((coin, index) => (
-                <List coin={coin} key={index} />
-              ))}
-              {coins.length === 0 && (
+              {coins &&
+                coins.map((coin, index) => <List coin={coin} key={index} />)}
+              {coins && coins.length === 0 && (
                 <h1 className="text-grey text-[60px] text-center pt-8">
                   No Results!
                 </h1>

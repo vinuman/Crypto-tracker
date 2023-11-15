@@ -69,10 +69,7 @@ const DashBoard = () => {
       <Header />
       <BackToTop />
       <Search search={search} setSearch={setSearch} />
-      <TabsComponent
-        coins={search ? filteredCoins : paginatedCoins}
-        search={search}
-      />
+      <TabsComponent coins={search ? filteredCoins : paginatedCoins} />
       {!search && (
         <PaginationComponenet page={page} handlePageChange={handlePageChange} />
       )}
