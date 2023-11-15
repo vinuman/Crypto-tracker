@@ -72,7 +72,7 @@ const Grid = ({ coin }) => {
           </div>
           <div
             onClick={handleBookMarkClick}
-            className={`flex justify-center items-center ml-24 cursor-pointer w-[3rem] h-[3rem]  ${
+            className={`flex justify-center items-center md:ml-24 ml-12 cursor-pointer w-[3rem] h-[3rem]  ${
               coin.price_change_percentage_24h > 0
                 ? "border-green"
                 : "border-red"

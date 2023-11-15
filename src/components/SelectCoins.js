@@ -63,8 +63,8 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
 
   return (
     <>
-      <div className="flex justify-start items-center gap-[0.5rem] m-[1.5rem]">
-        <p className=" font-bold text-blue">Crypto 1</p>
+      <div className="flex flex-col md:flex-row justify-start items-center gap-[0.5rem] md:m-[1.5rem]  w-[100%]">
+        <p className=" font-bold text-blue pt-4">Crypto 1</p>
         <Select
           value={crypto1}
           label="Crypto 1"
@@ -77,7 +77,7 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
               <MenuItem value={coin.id}>{coin.name}</MenuItem>
             ))}
         </Select>
-        <p className=" font-bold ml-4 text-green">Crypto 2</p>
+        <p className=" font-bold md:ml-4 pt-4 md:pt-0 text-green">Crypto 2</p>
         <Select
           value={crypto2}
           label="Crypto 2"

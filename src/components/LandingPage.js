@@ -49,7 +49,11 @@ const LandingPage = () => {
                 outlined={false}
               />
             </Link>
-            <Button text="Share" outlined={true} />
+            <Button
+              onClick={() => console.log("Clicked")}
+              text="Share"
+              outlined={true}
+            />
           </motion.div>
         </div>
         {/*  RIGHT SIDE */}

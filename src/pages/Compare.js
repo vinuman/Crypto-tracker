@@ -97,7 +97,7 @@ const Compare = () => {
   return (
     <>
       <Header />
-      <div className="flex md:justify-between justify-start items-center mx-[1.5rem] max-w-[100%] ">
+      <div className="flex flex-col md:flex-row md:justify-between justify-start items-center mx-[1.5rem] max-w-[100%]">
         <SelectCoins
           crypto1={crypto1}
           crypto2={crypto2}

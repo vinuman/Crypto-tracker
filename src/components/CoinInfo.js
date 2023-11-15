@@ -11,18 +11,20 @@ const CoinInfo = ({ title, desc }) => {
   return (
     <>
       <div className="p-8 bg-darkgrey m-[1.5rem]">
-        <h2 className="m-[1rem] text-[28px] font-bold">{title}</h2>
+        <h2 className="md:m-[1rem] md:text-[28px] text-[20px] font-bold">
+          {title}
+        </h2>
 
         {desc && desc.length > 300 ? (
           <p
             dangerouslySetInnerHTML={{ __html: flag ? fullDesc : readableDesc }}
-            className="m-[1rem] desc cursor-pointer transition-all duration-300"
+            className="md:m-[1rem] text-[0.8rem] md:text-[1rem] desc cursor-pointer transition-all duration-300"
             onClick={() => setFlag(!flag)}
           ></p>
         ) : (
           <p
             dangerouslySetInnerHTML={{ __html: desc }}
-            className="m-[1rem] desc cursor-pointer transition-all duration-300"
+            className="md:m-[1rem] text-[0.8rem] md:text-[1rem] desc cursor-pointer transition-all duration-300"
           ></p>
         )}
         {!desc && (

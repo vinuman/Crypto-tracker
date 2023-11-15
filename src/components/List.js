@@ -36,24 +36,24 @@ const List = ({ coin }) => {
           className="w-[100%] flex items-center lg:justify-center justify-between my-4 hover:bg-darkgrey transition-all duration-100 group "
         >
           <Tooltip title="coin name">
-            <td className="flex justify-start items-center gap-[0.5rem] lg:gap-[1rem] m-[1rem] lg:w-[16%] w-[30%] ">
+            <td className="flex flex-col md:flex-row justify-start items-center gap-[0.5rem] lg:gap-[1rem] m-[1rem] lg:w-[16%] w-[25%] ">
               <img
                 className=" h-[3.5rem] w-[3.5rem]"
                 src={coin.image}
                 alt={coin.name}
               ></img>
               <div className="flex flex-col gap-[0.5rem]">
-                <p className=" text-white uppercase font-bold text-[1.2rem] m-0">
+                <p className=" text-white uppercase font-bold text-[1.2rem] m-0 hidden md:block">
                   {coin.symbol}
                 </p>
-                <p className=" text-grey capitalize font-light text-[1rem] m-0">
+                <p className=" md:text-grey text-white capitalize font-light text-[1rem] m-0">
                   {coin.name}
                 </p>
               </div>
             </td>
           </Tooltip>
           <Tooltip title="coin price change percentage(24 hrs)">
-            <td className="w-[25%] lg:w-[16%]  ml-4">
+            <td className="w-[25%] lg:w-[16%]  ml-4 ">
               <div
                 className={`border-2 rounded-full py-[0.5rem] px-[0.6rem] text-center font-bold text-[1rem] transition-all duration-300  ${
                   coin.price_change_percentage_24h > 0
@@ -64,7 +64,6 @@ const List = ({ coin }) => {
                 {coin.price_change_percentage_24h
                   ? `${coin.price_change_percentage_24h.toFixed(2)}%`
                   : "N/A"}
-                %
               </div>
             </td>
           </Tooltip>
@@ -84,9 +83,9 @@ const List = ({ coin }) => {
             </div>
           </td>
           <Tooltip title="current price">
-            <td className=" pl-8 lg:w-[16%] w-[25%] ">
+            <td className=" md:pl-8 pl-2 lg:w-[16%] w-[25%] ">
               <h3
-                className={` md:text-[1.2rem] text-[1rem] font-bold ${
+                className={` md:text-[1.2rem] text-[1rem]  font-bold ${
                   coin.price_change_percentage_24h > 0
                     ? "text-green"
                     : "text-red"
@@ -119,7 +118,7 @@ const List = ({ coin }) => {
           <Tooltip title={added ? "remove from Watchlist" : "Add to Watchlist"}>
             <td
               onClick={handleBookMarkClick}
-              className={`flex justify-center items-center ml-4 cursor-pointer w-[3rem] h-[3rem] hover:border-2 ${
+              className={`flex justify-center items-center ml-4 w-[25%] cursor-pointer md:w-[3rem] h-[3rem] hover:border-2 ${
                 coin.price_change_percentage_24h > 0
                   ? "border-green"
                   : "border-red"
