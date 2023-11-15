@@ -24,16 +24,14 @@ const Compare = () => {
     labels: [],
     datasets: [],
   });
-  /* 
-  const handleDaysChange = () => {}; */
 
   const handleDaysChange = async (event) => {
-    const price1 = await getCoinPrices(crypto1, event.target.value, "prices");
-    const price2 = await getCoinPrices(crypto2, event.target.value, "prices");
-    setDays(event.target.value);
+    const newDay = event.target.value;
+    const price1 = await getCoinPrices(crypto1, newDay, "prices");
+    const price2 = await getCoinPrices(crypto2, newDay, "prices");
+    setDays(newDay);
     if (price1.length > 0 && price2.length > 0) {
       settingChartData(setChartData, price1, price2);
-      setLoading(false);
     }
   };
 
@@ -99,7 +97,7 @@ const Compare = () => {
   return (
     <>
       <Header />
-      <div className="flex justify-between items-center mx-[1.5rem] ">
+      <div className="flex md:justify-between justify-start items-center mx-[1.5rem] max-w-[100%] ">
         <SelectCoins
           crypto1={crypto1}
           crypto2={crypto2}

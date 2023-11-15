@@ -36,12 +36,12 @@ const DashBoard = () => {
   const getData = async () => {
     setLoading(true);
     const data = await get100Coins();
-    if (data && data.length > 2) {
-      setCoins(data);
-      setPaginatedCoins(data.slice(0, 10));
+    if (data.error) {
+      setError(data.error, "please try after some time :( ");
       setLoading(false);
     } else {
-      setError(data);
+      setCoins(data);
+      setPaginatedCoins(data.slice(0, 10));
       setLoading(false);
     }
   };

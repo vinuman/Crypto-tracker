@@ -7,10 +7,10 @@ export default function PriceToggle({
   togglePriceType,
   handlePriceTypeChange,
 }) {
-  const [selected, setSelected] = useState("prices");
   return (
     <div className="flex items-center justify-center">
       <ToggleButtonGroup
+        color="primary"
         value={togglePriceType}
         exclusive
         onChange={handlePriceTypeChange}
@@ -26,32 +26,17 @@ export default function PriceToggle({
             color: "var(--blue)",
           },
           "& .MuiToggleButton-standard": {
-            color: "var(--blue)",
+            color: "var(--white)",
           },
         }}
       >
-        <ToggleButton
-          className={`toggle-btn ${
-            selected === "prices" ? "selected-toggle" : ""
-          }`}
-          value="prices"
-        >
+        <ToggleButton className="toggle-btn" value="prices">
           Price
         </ToggleButton>
-        <ToggleButton
-          className={`toggle-btn ${
-            selected === "market_caps" ? "selected-toggle" : ""
-          }`}
-          value="market_caps"
-        >
+        <ToggleButton className="toggle-btn" value="market_caps">
           Market Cap
         </ToggleButton>
-        <ToggleButton
-          className={`toggle-btn ${
-            selected === "total_volumes" ? "selected-toggle" : ""
-          }`}
-          value="total_volumes"
-        >
+        <ToggleButton className="toggle-btn" value="total_volumes">
           Total Volume
         </ToggleButton>
       </ToggleButtonGroup>

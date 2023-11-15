@@ -35,11 +35,12 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
   const getData = async () => {
     setLoading(true);
     const data = await get100Coins();
-    if (data && data.length > 2) {
-      setAllCoins(data);
+
+    if (data.error) {
+      setError(data.error, "please try after some time :( ");
       setLoading(false);
     } else {
-      setError(data);
+      setAllCoins(data);
       setLoading(false);
     }
   };
@@ -70,9 +71,11 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
           onChange={(event) => handleCoinChange(event, false)}
           sx={styles}
         >
-          {allCoins.map((coin) => (
-            <MenuItem value={coin.id}>{coin.name}</MenuItem>
-          ))}
+          {allCoins
+            .filter((item) => item.name != crypto2)
+            .map((coin) => (
+              <MenuItem value={coin.id}>{coin.name}</MenuItem>
+            ))}
         </Select>
         <p className=" font-bold ml-4 text-green">Crypto 2</p>
         <Select
@@ -81,11 +84,13 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
           onChange={(event) => handleCoinChange(event, true)}
           sx={styles}
         >
-          {allCoins.map((coin, i) => (
-            <MenuItem key={i} value={coin.id}>
-              {coin.name}
-            </MenuItem>
-          ))}
+          {allCoins
+            .filter((item) => item.name !== crypto1)
+            .map((coin, i) => (
+              <MenuItem key={i} value={coin.id}>
+                {coin.name}
+              </MenuItem>
+            ))}
         </Select>
       </div>
     </>
