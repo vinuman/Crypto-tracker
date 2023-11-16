@@ -1,7 +1,7 @@
 import { convertDate } from "./convertDate";
 
 export const settingChartData = (setChartData, prices1, prices2) => {
-  if (prices2 && Array.isArray(prices2 && prices1)) {
+  if (prices1 && Array.isArray(prices1) && prices2 && Array.isArray(prices2)) {
     setChartData({
       labels: prices1.map((price) => convertDate(price[0])),
       datasets: [
@@ -17,7 +17,6 @@ export const settingChartData = (setChartData, prices1, prices2) => {
           pointRadius: 0,
           yAxisID: "crypto1",
         },
-
         {
           label: "Crypto2",
           data: prices2.map((price) => price[1]),
@@ -32,7 +31,7 @@ export const settingChartData = (setChartData, prices1, prices2) => {
         },
       ],
     });
-  } else if (prices1 && !prices2) {
+  } else if (prices1 && Array.isArray(prices1) && !prices2) {
     setChartData({
       labels: prices1.map((price) => convertDate(price[0])),
       datasets: [
