@@ -4,11 +4,18 @@ import CoinPage from "./pages/CoinPage";
 import Compare from "./pages/Compare";
 import { Routes, Route } from "react-router-dom";
 import WatchList from "./pages/WatchList";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "./slices/darkModeSlice";
 
 function App() {
+  const light = useSelector(currentLightTheme);
   return (
     <>
-      <div className="App bg-black text-white min-h-screen font-inter max-w-[1800px] mx-auto">
+      <div
+        className={`App min-h-screen font-inter max-w-[1800px] mx-auto ${
+          light ? "bg-white" : " bg-darkgrey"
+        }`}
+      >
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/compare" element={<Compare />}></Route>

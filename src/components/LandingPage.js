@@ -4,8 +4,11 @@ import iphone from "../assets/iphone.png";
 import gradient from "../assets/gradient.png";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const LandingPage = () => {
+  const light = useSelector(currentLightTheme);
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between items-start md:py-16 md:px-8">
