@@ -14,6 +14,8 @@ import { convertDate } from "../functions/convertDate";
 import SelectDays from "../components/SelectDays";
 import { settingChartData } from "../functions/settingChartData";
 import PriceToggle from "../components/PriceToggle";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -23,6 +25,8 @@ const CoinPage = () => {
   const [days, setDays] = useState(30);
   const [chartData, setChartData] = useState({});
   const [togglePriceType, setTogglePriceType] = useState("prices");
+
+  const light = useSelector((state) => currentLightTheme(state).light);
 
   const handlePriceTypeChange = async (event) => {
     setLoading(true);
@@ -75,21 +79,37 @@ const CoinPage = () => {
         <Error error={error} />
       ) : (
         <>
-          <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+          <div
+            className={`m-[1.5rem] rounded-lg ${
+              light ? "bg-white" : "bg-darkgrey"
+            }`}
+          >
             <List coin={coinData} />
           </div>
-          <div className=" bg-darkgrey m-[1.5rem]  rounded-lg flex flex-col md:flex-row items-center justify-center">
-            <SelectDays days={days} handleDayChange={handleDayChange} />
+          <div
+            className={` m-[1.5rem]  rounded-lg flex flex-col md:flex-row items-center justify-center ${
+              light ? "bg-white" : "bg-darkgrey"
+            }`}
+          >
+            <SelectDays
+              light={light}
+              days={days}
+              handleDayChange={handleDayChange}
+            />
             <PriceToggle
               togglePriceType={togglePriceType}
               handlePriceTypeChange={handlePriceTypeChange}
             />
           </div>
 
-          <div className="bg-darkgrey m-[1.5rem] rounded-lg">
+          <div
+            className={`m-[1.5rem] rounded-lg ${
+              light ? "bg-white" : "bg-darkgrey"
+            }`}
+          >
             <LineChart chartData={chartData} priceType={togglePriceType} />
           </div>
-          <CoinInfo title={coinData.name} desc={coinData.desc} />
+          <CoinInfo light={light} title={coinData.name} desc={coinData.desc} />
         </>
       )}
     </>

@@ -114,13 +114,25 @@ const Compare = () => {
           handleDayChange={handleDaysChange}
         />
       </div>
-      <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+      <div
+        className={`m-[1.5rem] rounded-lg ${
+          light ? "bg-white" : "bg-darkgrey"
+        }`}
+      >
         <List coin={crypto1Data} />
       </div>
-      <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
+      <div
+        className={`m-[1.5rem] rounded-lg ${
+          light ? "bg-white" : "bg-darkgrey"
+        }`}
+      >
         <List coin={crypto2Data} />
       </div>
-      <div className="bg-darkgrey m-[1.5rem] rounded-lg">
+      <div
+        className={`m-[1.5rem] rounded-lg ${
+          light ? "bg-white" : "bg-darkgrey"
+        }`}
+      >
         <LineChart
           chartData={chartData}
           priceType={"prices"}
@@ -129,10 +141,12 @@ const Compare = () => {
       </div>
 
       <CoinInfo
+        light={light}
         title={crypto1Data ? crypto1Data.name : null}
         desc={crypto1Data ? crypto1Data.desc : null}
       />
       <CoinInfo
+        light={light}
         title={crypto2Data ? crypto2Data.name : null}
         desc={crypto2Data ? crypto2Data.desc : null}
       />

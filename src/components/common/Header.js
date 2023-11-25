@@ -19,7 +19,7 @@ const Header = () => {
     <>
       <nav
         className={`w-[100%] h-[50px]  flex justify-between items-center px-8 py-12 sticky  ${
-          light ? " text-darkgrey bg-white" : "text-[#fff] bg-darkgrey"
+          light ? " text-darkgrey bg-white" : "text-[#fff] bg-black"
         }`}
       >
         {/*  DIV LEFT */}
