@@ -7,7 +7,7 @@ import { loadingButtonClasses } from "@mui/lab";
 import Loader from "./common/Loader";
 import { get100Coins } from "../functions/get100Coins";
 
-const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
+const SelectCoins = ({ crypto1, crypto2, handleCoinChange, light }) => {
   const [allCoins, setAllCoins] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,6 +20,21 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
     },
     "& .MuiSvgIcon-root": {
       color: "var(--white)",
+    },
+    "&:hover": {
+      "&& fieldset": {
+        borderColor: "#3a80e9",
+      },
+    },
+  };
+  const styles2 = {
+    height: "2.5rem",
+    color: "var(--black)",
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "var(--black)",
+    },
+    "& .MuiSvgIcon-root": {
+      color: "var(--black)",
     },
     "&:hover": {
       "&& fieldset": {
@@ -64,12 +79,12 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
   return (
     <>
       <div className="flex flex-col md:flex-row justify-start items-center gap-[0.5rem] md:m-[1.5rem]  w-[100%]">
-        <p className=" font-bold text-blue pt-4">Crypto 1</p>
+        <p className=" font-bold text-blue">Crypto 1</p>
         <Select
           value={crypto1}
           label="Crypto 1"
           onChange={(event) => handleCoinChange(event, false)}
-          sx={styles}
+          sx={light ? styles2 : styles}
         >
           {allCoins
             .filter((item) => item.name != crypto2)
@@ -82,7 +97,7 @@ const SelectCoins = ({ crypto1, crypto2, handleCoinChange }) => {
           value={crypto2}
           label="Crypto 2"
           onChange={(event) => handleCoinChange(event, true)}
-          sx={styles}
+          sx={light ? styles2 : styles}
         >
           {allCoins
             .filter((item) => item.name !== crypto1)

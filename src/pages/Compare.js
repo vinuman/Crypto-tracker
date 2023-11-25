@@ -10,6 +10,8 @@ import CoinInfo from "../components/CoinInfo";
 import { settingChartData } from "../functions/settingChartData";
 import LineChart from "../components/LineChart";
 import Loader from "../components/common/Loader";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const Compare = () => {
   const [crypto1, setCrypto1] = useState("bitcoin");
@@ -24,6 +26,8 @@ const Compare = () => {
     labels: [],
     datasets: [],
   });
+
+  const light = useSelector((state) => currentLightTheme(state).light);
 
   const handleDaysChange = async (event) => {
     const newDay = event.target.value;
@@ -99,11 +103,16 @@ const Compare = () => {
       <Header />
       <div className="flex flex-col md:flex-row md:justify-between justify-start items-center mx-[1.5rem] max-w-[100%]">
         <SelectCoins
+          light={light}
           crypto1={crypto1}
           crypto2={crypto2}
           handleCoinChange={handleCoinChange}
         />
-        <SelectDays days={days} handleDayChange={handleDaysChange} />
+        <SelectDays
+          light={light}
+          days={days}
+          handleDayChange={handleDaysChange}
+        />
       </div>
       <div className=" bg-darkgrey m-[1.5rem] rounded-lg">
         <List coin={crypto1Data} />

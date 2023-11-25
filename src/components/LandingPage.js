@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 import { currentLightTheme } from "../slices/darkModeSlice";
 
 const LandingPage = () => {
-  const light = useSelector(currentLightTheme);
+  const light = useSelector((state) => currentLightTheme(state).light);
+  console.log(light);
   return (
     <>
       <div className="flex flex-col md:flex-row justify-between items-start md:py-16 md:px-8">
@@ -18,7 +19,9 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className=" text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6.5rem] font-extrabold md:-mb-4 custom-h1 transition-all duration-300"
+            className={`text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6.5rem] font-extrabold md:-mb-4 transition-all duration-300 ${
+              light ? "text-black custom2-h1" : "custom-h1"
+            }`}
           >
             Track Crypto
           </motion.h1>

@@ -64,6 +64,13 @@ img {
   -webkit-text-stroke-color: white;
 }
 
+.custom2-h1:hover {
+  color: var(--white);
+  -webkit-text-fill-color: var(--white);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
 .desc a {
   color: #3a80e9;
   text-decoration: underline;
@@ -78,7 +85,8 @@ img {
   color: var(--white) !important;
 }
 
-.bookmark {
+.selected-link-dark {
+  color: var(--black) !important;
 }
 
 @media only screen and (max-width: 758px) {

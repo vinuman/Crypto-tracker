@@ -9,10 +9,14 @@ import { addToWatchList } from "../functions/addToWatchList";
 import { alreadyAddedToWatchList } from "../functions/alreadyAddedToWatchList";
 import { removeFromWatchList } from "../functions/removeFromWatchList";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const List = ({ coin }) => {
   const [added, setAdded] = useState(alreadyAddedToWatchList(coin.id));
   const navigate = useNavigate();
+
+  const light = useSelector((state) => currentLightTheme(state).light);
 
   const handleBookMarkClick = (event) => {
     event.stopPropagation();
@@ -33,7 +37,9 @@ const List = ({ coin }) => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           onClick={() => navigate(`/coin/${coin.id}`)}
-          className="w-[100%] flex items-center lg:justify-center justify-between my-4 hover:bg-darkgrey transition-all duration-100 group "
+          className={`w-[100%] flex items-center lg:justify-center justify-between my-4  transition-all duration-100 group ${
+            light ? " bg-white hover:bg-gray-200" : "bg-black hover:bg-darkgrey"
+          }`}
         >
           <Tooltip title="coin name">
             <td className="flex flex-col md:flex-row justify-start items-center gap-[0.5rem] lg:gap-[1rem] m-[1rem] lg:w-[16%] w-[25%] ">
@@ -43,7 +49,11 @@ const List = ({ coin }) => {
                 alt={coin.name}
               ></img>
               <div className="flex flex-col gap-[0.5rem]">
-                <p className=" text-white uppercase font-bold text-[1.2rem] m-0 hidden md:block">
+                <p
+                  className={`uppercase font-bold text-[1.2rem] m-0 hidden md:block ${
+                    light ? "text-black" : "text-white"
+                  }`}
+                >
                   {coin.symbol}
                 </p>
                 <p className=" md:text-grey text-white capitalize font-light text-[1rem] m-0">
@@ -99,7 +109,11 @@ const List = ({ coin }) => {
           </Tooltip>
           <Tooltip title="total volume">
             <td className=" text-center ml-32 w-[16%] hidden lg:block">
-              <p className=" text-white text-[1rem] font-semibold">
+              <p
+                className={`t text-[1rem] font-semibold ${
+                  light ? " text-black" : "text-white"
+                }`}
+              >
                 {coin.total_volume
                   ? `${coin.total_volume.toLocaleString()}`
                   : "N/A"}
@@ -108,7 +122,11 @@ const List = ({ coin }) => {
           </Tooltip>
           <Tooltip title="market cap">
             <td className=" ml-32 text-center w-[16%] hidden lg:block">
-              <p className=" text-white text-[1rem] font-semibold">
+              <p
+                className={` text-[1rem] font-semibold ${
+                  light ? " text-black" : "text-white"
+                }`}
+              >
                 {coin.market_cap
                   ? `${coin.market_cap.toLocaleString()}`
                   : "N/A"}
@@ -125,9 +143,13 @@ const List = ({ coin }) => {
               }`}
             >
               {added ? (
-                <BookmarkAddedIcon className={`text-white`} />
+                <BookmarkAddedIcon
+                  className={`${light ? "text-black" : " text-white"}`}
+                />
               ) : (
-                <BookmarkAddIcon className={`text-white`} />
+                <BookmarkAddIcon
+                  className={`${light ? "text-black" : " text-white"}`}
+                />
               )}
             </td>
           </Tooltip>

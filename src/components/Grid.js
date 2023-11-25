@@ -10,12 +10,16 @@ import { removeFromWatchList } from "../functions/removeFromWatchList";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const Grid = ({ coin }) => {
   const [added, setAdded] = useState(alreadyAddedToWatchList(coin.id));
   const [sucessMessage, setSuccessMessage] = useState(false);
   const [removeMessage, setRemoveMessage] = useState(false);
   const navigate = useNavigate();
+
+  const light = useSelector((state) => currentLightTheme(state).light);
 
   const handleDivClick = () => {
     navigate(`/coin/${coin.id}`);
@@ -50,11 +54,11 @@ const Grid = ({ coin }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         onClick={handleDivClick}
-        className={`w-[320px] relative bg-darkgrey border-2 border-darkgrey rounded-lg flex flex-col justify-center transition-all duration-300 group cursor-pointer ${
+        className={`w-[320px] relative border-2 rounded-lg flex flex-col justify-center transition-all duration-300 group cursor-pointer ${
           coin.price_change_percentage_24h > 0
             ? " hover:border-green"
             : " hover:border-red"
-        }`}
+        } ${light ? "bg-white border-darkgray" : "bg-gray border-white"}`}
       >
         <div className="flex justify-start items-center gap-[1rem] m-[1rem]">
           <img
@@ -63,7 +67,11 @@ const Grid = ({ coin }) => {
             alt={coin.name}
           ></img>
           <div className="flex flex-col gap-[0.5rem]">
-            <p className=" text-white uppercase font-bold text-[1.2rem] m-0">
+            <p
+              className={` uppercase font-bold text-[1.2rem] m-0 ${
+                light ? "text-black" : "text-white"
+              }`}
+            >
               {coin.symbol}
             </p>
             <p className=" text-grey capitalize font-light text-[1rem] m-0">
@@ -79,9 +87,13 @@ const Grid = ({ coin }) => {
             }`}
           >
             {added ? (
-              <BookmarkAddedIcon className={` text-white hover:text-[2rem]`} />
+              <BookmarkAddedIcon
+                className={`${light ? "text-black" : " text-white"}`}
+              />
             ) : (
-              <BookmarkAddIcon className={` text-white hover:text-[2rem]`} />
+              <BookmarkAddIcon
+                className={`${light ? "text-black" : " text-white"}`}
+              />
             )}
           </div>
         </div>

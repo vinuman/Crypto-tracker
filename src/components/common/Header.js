@@ -12,7 +12,8 @@ import { currentLightTheme } from "../../slices/darkModeSlice";
 
 const Header = () => {
   const location = useLocation();
-  const light = useSelector(currentLightTheme);
+  const light = useSelector((state) => currentLightTheme(state).light);
+  const checked = useSelector((state) => currentLightTheme(state).checked);
 
   return (
     <>
@@ -33,10 +34,10 @@ const Header = () => {
             </h1>
           </Link>
         </div>
-        <div className="flex items-center gap-[0.8rem] ">
+        <div className="flex items-center gap-[0.8rem]  p-2">
           {light ? <MoonDark /> : <MoonIcon />}
 
-          <ToggleButtton />
+          <ToggleButtton checked={checked} />
           {light ? <SunDark /> : <SunIcon />}
         </div>
 
@@ -45,7 +46,11 @@ const Header = () => {
           <Link to="/">
             <p
               className={`text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer ${
-                location.pathname === "/" ? "selected-link" : ""
+                location.pathname === "/" && !light
+                  ? "selected-link"
+                  : location.pathname === "/" && light
+                  ? "selected-link-dark"
+                  : ""
               }`}
             >
               Home
@@ -54,7 +59,11 @@ const Header = () => {
           <Link to="/compare">
             <p
               className={`text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer ${
-                location.pathname === "/compare" ? "selected-link" : ""
+                location.pathname === "compare" && !light
+                  ? "selected-link"
+                  : location.pathname === "/compare" && light
+                  ? "selected-link-dark"
+                  : ""
               }`}
             >
               Compare
@@ -63,7 +72,11 @@ const Header = () => {
           <Link to="/watchlist">
             <p
               className={`text-grey font-semibold hover:text-white transition-all duration-300 cursor-pointer ${
-                location.pathname === "/watchlist" ? "selected-link" : ""
+                location.pathname === "/watchlist" && !light
+                  ? "selected-link"
+                  : location.pathname === "/watchlist" && light
+                  ? "selected-link-dark"
+                  : ""
               }`}
             >
               Watchlist

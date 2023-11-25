@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = false;
+const initialState = {
+  checked: false,
+  light: false,
+};
 
 const DarkSlice = createSlice({
   name: "dark",
   initialState,
   reducers: {
     toggleDarkMode: (state) => {
-      return !state;
+      state.checked = !state.checked;
+      state.light = !state.light;
     },
   },
 });

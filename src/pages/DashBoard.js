@@ -8,6 +8,8 @@ import Loader from "../components/common/Loader";
 import Error from "../components/common/Error";
 import BackToTop from "../components/common/BackToTop";
 import { get100Coins } from "../functions/get100Coins";
+import { useSelector } from "react-redux";
+import { currentLightTheme } from "../slices/darkModeSlice";
 
 const DashBoard = () => {
   const [coins, setCoins] = useState([]);
@@ -16,6 +18,8 @@ const DashBoard = () => {
   const [paginatedCoins, setPaginatedCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const light = useSelector((state) => currentLightTheme(state).light);
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -69,9 +73,16 @@ const DashBoard = () => {
       <Header />
       <BackToTop />
       <Search search={search} setSearch={setSearch} />
-      <TabsComponent coins={search ? filteredCoins : paginatedCoins} />
+      <TabsComponent
+        light={light}
+        coins={search ? filteredCoins : paginatedCoins}
+      />
       {!search && (
-        <PaginationComponenet page={page} handlePageChange={handlePageChange} />
+        <PaginationComponenet
+          light={light}
+          page={page}
+          handlePageChange={handlePageChange}
+        />
       )}
     </>
   );

@@ -8,7 +8,7 @@ import Grid from "./Grid";
 import List from "./List";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-export default function TabsComponent({ coins }) {
+export default function TabsComponent({ coins, light }) {
   const [value, setValue] = useState("grid");
 
   const handleChange = (event, newValue) => {
@@ -26,10 +26,13 @@ export default function TabsComponent({ coins }) {
   const style = {
     color: "white",
   };
+  const style2 = {
+    color: "black",
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <div className=" bg-black">
+      <div className={`${light ? "bg-white" : "bg-black"}`}>
         <TabContext value={value}>
           <div>
             <TabList
@@ -40,10 +43,10 @@ export default function TabsComponent({ coins }) {
               <Tab
                 label="Grid View"
                 value="grid"
-                sx={style}
+                sx={light ? style2 : style}
                 className=" text-[1rem] md:text-[1.8rem]"
               />
-              <Tab label="List View" value="list" sx={style} />
+              <Tab label="List View" value="list" sx={light ? style2 : style} />
             </TabList>
           </div>
           <TabPanel value="grid">

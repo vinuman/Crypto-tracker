@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const MoonDark = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={26} height={26} {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={20} height={26} {...props}>
     <path
       fill="#1b1b1b"
       fillRule="evenodd"

@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 import { currentLightTheme } from "./slices/darkModeSlice";
 
 function App() {
-  const light = useSelector(currentLightTheme);
+  const light = useSelector((state) => currentLightTheme(state).light);
   return (
     <>
       <div
         className={`App min-h-screen font-inter max-w-[1800px] mx-auto ${
-          light ? "bg-white" : " bg-darkgrey"
+          light ? "bg-white" : " bg-gray"
         }`}
       >
         <Routes>
