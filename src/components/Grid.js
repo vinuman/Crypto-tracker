@@ -20,6 +20,7 @@ const Grid = ({ coin }) => {
   const navigate = useNavigate();
 
   const light = useSelector((state) => currentLightTheme(state).light);
+  const currency = useSelector((state) => state.currency.currency);
 
   const handleDivClick = () => {
     navigate(`/coin/${coin.id}`);
@@ -127,7 +128,8 @@ const Grid = ({ coin }) => {
               coin.price_change_percentage_24h > 0 ? "text-green" : "text-red"
             }`}
           >
-            ${coin.current_price.toLocaleString()}
+            {currency === "usd" ? "$" : "₹"}
+            {coin.current_price.toLocaleString()}
           </h3>
           <div className=" pt-4">
             <p className=" text-grey text-[0.8rem] font-semibold pb-2">

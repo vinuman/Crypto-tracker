@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div
-        className={`App min-h-screen font-inter max-w-[1800px] mx-auto ${
+        className={`App min-h-[100dvh] font-inter max-w-[1800px] mx-auto ${
           light ? "bg-white" : " bg-gray"
         }`}
       >

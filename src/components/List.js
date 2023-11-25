@@ -17,6 +17,7 @@ const List = ({ coin }) => {
   const navigate = useNavigate();
 
   const light = useSelector((state) => currentLightTheme(state).light);
+  const currency = useSelector((state) => state.currency.currency);
 
   const handleBookMarkClick = (event) => {
     event.stopPropagation();
@@ -101,8 +102,9 @@ const List = ({ coin }) => {
                     : "text-red"
                 }`}
               >
+                {currency === "usd" ? "$" : "₹"}
                 {coin.current_price
-                  ? `$${coin.current_price.toLocaleString()}`
+                  ? ` ${coin.current_price.toLocaleString()}`
                   : "N/A"}
               </h3>
             </td>
