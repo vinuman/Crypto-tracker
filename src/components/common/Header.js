@@ -7,13 +7,15 @@ import MoonIcon from "../MoonIcon";
 import SunIcon from "../SunIcon";
 import MoonDark from "../MoonDark";
 import SunDark from "../SunDark";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { currentLightTheme } from "../../slices/darkModeSlice";
+import { toggleDarkMode } from "../../slices/darkModeSlice";
 
 const Header = () => {
   const location = useLocation();
   const light = useSelector((state) => currentLightTheme(state).light);
   const checked = useSelector((state) => currentLightTheme(state).checked);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -35,10 +37,23 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center gap-[0.8rem]  p-2">
-          {light ? <MoonDark /> : <MoonIcon />}
+          <div
+            onClick={() => {
+              dispatch(toggleDarkMode());
+            }}
+          >
+            {light ? <MoonDark /> : <MoonIcon />}
+          </div>
 
-          <ToggleButtton checked={checked} />
-          {light ? <SunDark /> : <SunIcon />}
+          <ToggleButtton className=" hidden md:block" checked={checked} />
+          <div
+            onClick={() => {
+              dispatch(toggleDarkMode());
+            }}
+          >
+            {" "}
+            {light ? <SunDark /> : <SunIcon />}
+          </div>
         </div>
 
         {/*  DIV RIGHT */}

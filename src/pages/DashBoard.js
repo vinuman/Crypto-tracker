@@ -107,7 +107,7 @@ const DashBoard = () => {
           <Button
             onClick={handleCurrencyChange}
             text={currency === "usd" ? "Change to INR" : "Change to USD"}
-            outlined={false}
+            outlined={true}
           />
         </div>
       </div>
